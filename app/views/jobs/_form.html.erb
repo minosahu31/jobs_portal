@@ -1,0 +1,7 @@
+<%= form_for ([@company,@job]) do |f| %>
+	<p><b>Job Title:</b></p><%= f.text_field :title %>
+	<p><b>Descritpion:</b></p><%= f.text_field :description %>
+	<p><b>Exprience:</b></p><%= f.text_field :exprience %>
+	<p><b>Skill Set:</b></p><%= f.text_area :skill_set %>
+	<p><%= f.submit %></p>
+<% end %>

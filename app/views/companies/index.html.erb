@@ -1,0 +1,20 @@
+<div class="container">
+	<h1>Companies <%= link_to "Add Company", new_company_path, class: "btn btn-default pull-right" %></h1><hr/>
+		<div class="col-md-10 col-md-offset-1 table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<th>Company name</th>
+					<th>No.of Jobs</th>
+				</tr>	
+				<% @companies.find_each do |company| %>
+					<tr>	
+						<div class="col-md-6 col-md-offset-3">
+							<td><h2 class="title"><%= link_to company.name, company_path(company) %></h2></td>
+						
+							<td><%= company.jobs.count %></td>
+						</div>
+					</tr>		
+				<% end %>	
+			</table>		
+		</div>	
+</div>

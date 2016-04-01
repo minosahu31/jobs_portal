@@ -1,0 +1,13 @@
+<%= form_for @company do |f|%>
+	<% if @company.errors.any? %>
+	  <ul> 
+		<% @company.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+	  </ul>	
+	<% end %>
+	<p><b>Company name:</b></p><%= f.text_field :name %>
+	<p><b>Location:</b></p><%= f.text_field :location %>
+	<p><b>Website:</b></p><%= f.text_field :website %>
+	<p><%= f.submit %></p>
+<% end %>

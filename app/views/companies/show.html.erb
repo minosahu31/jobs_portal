@@ -1,0 +1,49 @@
+<div class="container">
+	<h1>Company Details <%= link_to "Back", companies_path, class: "btn btn-default pull-right" %><%= link_to "Edit", edit_company_path(@company) ,class: "btn btn-default pull-right" %><%= link_to "Delete", company_path(@company) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default pull-right" %><%= link_to "Add Jobs", new_company_job_path(@company), class: "btn btn-default pull-right" %></h1><hr/>
+	<div class="col-md-8 col-md-offset-2">
+		<p><b> Company Name : </b><%= @company.name %></p>
+		<p><b> Company Location : </b><%= @company.location %></p>
+		<p><b> Company Website : </b><%= @company.website %></p>
+	</div>
+
+</div><hr/>
+<div class="container">
+	<h1>Jobs Details </h1><hr/>
+	<div class="col-md-10 col-md-offset-1">
+		<table class="table table-hover">
+			<tr class="table_row">
+				<th>S.No</th>	
+				<th>Job Title</th>
+				<th>Description</th>
+				<th>Exprience</th>
+				<th>Skills</th>
+				<th>Actions</th>
+			</tr>
+			<% x = 1  %>
+			<% @jobs.each do |job| %>
+			<tr class="table_row">	
+				<td>
+					<%= x %>
+				</td>	
+				<td>
+					<%= job.title %></p>
+				</td>
+				<td>
+					<%= job.description %></p>
+				</td>
+				<td>
+					<%= job.exprience %></p>
+				</td>
+				<td>
+					<%= job.skill_set %></p>
+				</td>
+				<td class="actions">
+					<%= link_to "Edit", edit_company_job_path(@company,job) ,class: "btn btn-default" %>
+					 <%= link_to "Delete", company_path(@company,@job) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default" %>
+				</td>	
+			</tr>		
+			<% x += 1 %>
+			<% end %>
+		</table>	
+	</div>
+</div>
