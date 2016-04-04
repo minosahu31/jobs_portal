@@ -1,5 +1,25 @@
 Rails.application.routes.draw do
 
+  get 'candidates/new'
+
+  get 'candidates/create'
+
+  devise_for :candidates
+
+#  concern :candidate_jobable do
+ #   resources :candidate_jobs
+ # end
+
+  #resources :candidates, concerns: :candidate_jobable
+  #resources :jobs, concerns: :candidate_jobable
+
+  resources :jobs do
+    resources :candidates
+  end
+
+ # resources "candidate_jobable"
+  #resources "candidate_jobs"
+ # resources 'candidates'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

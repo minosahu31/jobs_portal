@@ -1,7 +1,8 @@
 class JobsController < ApplicationController
 
 	def show
-
+		#raise params.inspect
+		@job = Job.find(params[:id])
 	end
 
 	def new

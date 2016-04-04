@@ -13,8 +13,18 @@
 			<div class="navbar-header">
 				<%= link_to "Companies", companies_path, class: "navbar-brand" %>
 			</div>	
+			<ul class="nav navbar-nav pull-right">
+				<li><%= link_to "Sign Up", new_candidate_registration_path, class: "btn btn-default pull-right" %></li>
+				<% if candidate_signed_in? %>
+					<li><%= link_to "Sign Out", destroy_candidate_session_path, class: "btn btn-default pull-right" %></li>
+				<% else %>
+					<li><%= link_to "Login", new_candidate_session_path, class: "btn btn-default pull-right" %></li>
+				<% end %>
+			</ul>
 		</div>	
 	</nav>	
+	 <p class="notice"><%= notice %></p>
+     <p class="alert"><%= alert %></p>
 
 <%= yield %>
 

@@ -6,8 +6,12 @@ class CompaniesController < ApplicationController
 	  end
 
 	  def show
+	  	#raise params.inspect
 	  	@jobs = @company.jobs
 		@job = Job.new
+		@candidate = current_candidate
+		@candidatejob_ids = @candidate.candidate_jobs.pluck(:job_id)
+
 	  end
 
 	  def new
