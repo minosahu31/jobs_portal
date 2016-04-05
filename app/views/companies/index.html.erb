@@ -1,5 +1,11 @@
 <div class="container">
-	<h1>Companies <%= link_to "Add Company", new_company_path, class: "btn btn-default pull-right" %></h1><hr/>
+	<h1>Companies 
+		<% if candidate_signed_in? %>
+			<% if current_candidate.role == "admin" %>
+				<%= link_to "Add Company", new_company_path, class: "btn btn-default pull-right" %>
+			<% end %>	
+		<% end %>	
+	</h1><hr/>
 		<div class="col-md-10 col-md-offset-1 table-responsive">
 			<table class="table table-bordered">
 				<tr>

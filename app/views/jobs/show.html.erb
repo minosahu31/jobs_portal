@@ -1,1 +1,10 @@
-<p><%= link_to "Apply", job_candidates_path(@job), method: :post%></p>
+<div class="container">
+	<div class="col-md-6 col-md-offset-3">
+		<h1 class="text-center"><u>Job Details</u></h1>
+		<p><b>Title:  </b></p><p class="show-style"><%= @job.title %></p>
+		<p><b>Description:  </b></p><p class="show-style"><%= @job.description %></p>
+		<p><b>Exprience:  </b></p><p class="show-style"><%= @job.exprience %></p>
+		<p><b>Skills:  </b></p><p class="show-style"><%= @job.skill_set %></p>
+		<p class="button-style"><%= link_to "Apply", job_candidates_path(@job), method: :post, class: "btn btn-success" %></p>
+	</div>
+</div>

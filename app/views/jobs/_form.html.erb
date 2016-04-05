@@ -1,7 +1,22 @@
+<h1 class="text-center"><u>Create Job</u></h1>
 <%= form_for ([@company,@job]) do |f| %>
-	<p><b>Job Title:</b></p><%= f.text_field :title %>
-	<p><b>Descritpion:</b></p><%= f.text_field :description %>
-	<p><b>Exprience:</b></p><%= f.text_field :exprience %>
-	<p><b>Skill Set:</b></p><%= f.text_area :skill_set %>
-	<p><%= f.submit %></p>
+	<div class="form-group">	
+		<p><b>Job Title:</b></p>
+		<%= f.text_field :title, class: "form-control" %>
+	</div>
+	<div class="form-group">		
+		<p><b>Descritpion:</b></p>
+		<%= f.text_field :description, class: "form-control" %>
+	</div>
+	<div class="form-group">		
+		<p><b>Exprience:</b></p>
+		<%= f.text_field :exprience, class: "form-control" %>
+	</div>
+	<div class="form-group">	
+		<p><b>Skill Set:</b></p>
+		<%= f.text_area :skill_set, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<p><%= f.submit "Create Job", class: "btn-lg btn-default" %></p>
+	</div>
 <% end %>

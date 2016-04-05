@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404121905) do
+ActiveRecord::Schema.define(version: 20160405060218) do
 
   create_table "candidate_jobs", force: :cascade do |t|
     t.integer  "candidate_id", limit: 4
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20160404121905) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.string   "role",                   limit: 255
   end
 
   add_index "candidates", ["email"], name: "index_candidates_on_email", unique: true, using: :btree

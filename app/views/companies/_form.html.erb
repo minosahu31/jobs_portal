@@ -1,13 +1,44 @@
+<h1 class="text-center"><u>Create Company</u></h1>
 <%= form_for @company do |f|%>
 	<% if @company.errors.any? %>
+	<h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
 	  <ul> 
 		<% @company.errors.full_messages.each do |message| %>
 			<li><%= message %></li>
 		<% end %>
 	  </ul>	
 	<% end %>
-	<p><b>Company name:</b></p><%= f.text_field :name %>
-	<p><b>Location:</b></p><%= f.text_field :location %>
-	<p><b>Website:</b></p><%= f.text_field :website %>
-	<p><%= f.submit %></p>
+	<div class="col-md-9 col-md-offset-1">
+		<div class="form-group">
+			<p><b>Company name:</b></p>
+			<%= f.text_field :name, class: "form-control" %>
+		</div>	
+		<div class="form-group">	
+			<p><b>Location:</b></p>
+			<%= f.text_field :location, class: "form-control" %>
+		</div>	
+		<div class="form-group">		
+			<p><b>Website:</b></p>
+			<%= f.text_field :website, class: "form-control" %>
+		</div>	
+		<!--div class="form-group">		
+			<p><b>Email:</b></p>
+			<%# text_field_tag :email,   nil, autocomplete: "off", class: "form-control" %>
+		</div>	
+		<div class="form-group">		
+			<p><b>Password:</b></p>
+			<%# password_field_tag :password,  nil,  autocomplete: "off", class: "form-control" %>
+		</div>	
+		<div class="form-group">
+	        <p><b>password_confirmation </b></p>
+	        <%# password_field_tag :password_confirmation, nil, autocomplete: "off", class: "form-control" %>
+	    </div>
+	    <div class="form-group">
+	        <p><b>Company Role: </b></p>
+	        <%# text_field_tag :role, "company", autocomplete: "off", class: "form-control", disabled: true %>
+	    </div-->
+		<div class="form-group button-style">		
+			<p><%= f.submit "Create Company ", class: "btn btn-default" %></p>
+		</div>
+	</div>	
 <% end %>

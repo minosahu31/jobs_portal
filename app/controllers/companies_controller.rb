@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+	before_action :authenticate_candidate!, except: [:index]
     before_action :find_company , only: [:show, :edit, :update, :destroy]
 
 	  def index
@@ -6,12 +7,11 @@ class CompaniesController < ApplicationController
 	  end
 
 	  def show
-	  	#raise params.inspect
+	  	@company = Company.find(params[:id])
 	  	@jobs = @company.jobs
 		@job = Job.new
 		@candidate = current_candidate
-		@candidatejob_ids = @candidate.candidate_jobs.pluck(:job_id)
-
+		@candidates = Candidate.all
 	  end
 
 	  def new
@@ -19,6 +19,7 @@ class CompaniesController < ApplicationController
 	  end
 
 	  def create
+	  	#raise params.inspect
 	    @company = Company.new(company_params)
 	    if @company.save
 	      redirect_to companies_path

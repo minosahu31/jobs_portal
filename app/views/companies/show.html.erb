@@ -1,5 +1,13 @@
 <div class="container">
-	<h1>Company Details <%= link_to "Back", companies_path, class: "btn btn-default pull-right" %><%= link_to "Edit", edit_company_path(@company) ,class: "btn btn-default pull-right" %><%= link_to "Delete", company_path(@company) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default pull-right" %><%= link_to "Add Jobs", new_company_job_path(@company), class: "btn btn-default pull-right" %>
+	<h1>Company Details 
+		<%= link_to "Back", companies_path, class: "btn btn-default pull-right" %>
+		<% if candidate_signed_in? %>
+			<% if current_candidate.email == "#{@company.name.downcase}@gmail.com" %>
+				<%= link_to "Edit", edit_company_path(@company) ,class: "btn btn-default pull-right" %>
+				<%= link_to "Delete", company_path(@company) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default pull-right" %>
+				<%= link_to "Add Jobs", new_company_job_path(@company), class: "btn btn-default pull-right" %>
+			<% end %>	
+		<% end %>	
 	</h1><hr/>
 
 	<div class="col-md-8 col-md-offset-2">
@@ -10,7 +18,7 @@
 
 </div><hr/>
 <div class="container">
-	<h1>Jobs Details </h1><hr/>
+	<h1>Jobs Details </h1>
 	<div class="col-md-12 col-md-offset-0">
 		<table class="table table-hover">
 			<tr class="table_row">
@@ -19,7 +27,10 @@
 				<th>Description</th>
 				<th>Exprience</th>
 				<th>Skills</th>
-				<th>Actions</th>
+				<% if current_candidate.role.downcase != "admin" && current_candidate.role.downcase != "company" || current_candidate.email == "#{@company.name.downcase}@gmail.com"%>
+					<th>Actions</th>	
+				<% end %>
+		
 			</tr>
 
 			<% @jobs.each_with_index do |job, i| %>
@@ -40,19 +51,43 @@
 					<%= job.skill_set %></p>
 				</td>
 				<td class="actions">
-					<%= link_to "Edit", edit_company_job_path(@company,job) , class: "btn btn-default" %>
-					<%= link_to "Delete", company_job_path(@company,job) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default" %>
-						
-					<% if @candidate.jobs.where(id: job.id).present? %>
-						<%= link_to "Applied", company_path(@company), class: "btn btn-danger" %>
-					<% else %>
-						<%= link_to "Apply", job_path(job), class: "btn btn-success" %>
-						
-					<% end %>		
+					<% if candidate_signed_in? %>
+						<% if current_candidate.email == "#{@company.name.downcase}@gmail.com" %>
+							<%= link_to "Edit", edit_company_job_path(@company,job) , class: "btn btn-default" %>
+							<%= link_to "Delete", company_job_path(@company,job) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default" %>		
+						<% elsif current_candidate.role != "admin" && current_candidate.role != "company" %>
+							<% if @candidate.jobs.where(id: job.id).present? %>
+								<%= link_to "Applied", company_path(@company), class: "btn btn-danger" %>
+							<% else %>
+								<%= link_to "Apply", job_path(job), class: "btn btn-success" %>
+							<% end %>		
+						<% end %>
+					<% end %>
 				</td>	
 			</tr>		
 			
 			<% end %>
 		</table>	
+
 	</div>
 </div>
+<% if candidate_signed_in? %>
+	<% if current_candidate.email == "#{@company.name.downcase}@gmail.com" %>
+	<hr/>
+		<div class="container applied-candidates">
+			<h1>Applied candidates</h1><hr/>
+			<% @jobs.each do |job| %><% j =0 %>
+			<p class="applied-candidates-title"><h4><b><%= job.title %>:<% @candidates.each do |candidate|%><% if job.candidates.where(id: candidate.id).present? %><% j += 1 %><% end %><% end %>  (<%= j %>)</b></h4></p>
+			<% count = 0 %>
+				<% @candidates.each do |candidate|%>
+					<% if job.candidates.where(id: candidate.id).present? %>
+						<p class="applied-candidates-email"><%= candidate.email %></p><% count += 1 %>
+					<% end %>	
+				<% end %>
+				<% if count == 0 %>
+						<p class="applied-candidates-msg"><%= "Sorry no one applied till now..." %></p>
+				<% end %>
+			<% end %>	
+		</div>	
+	<% end %>
+<% end %>		

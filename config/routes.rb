@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'candidates/new'
-
-  get 'candidates/create'
-
   devise_for :candidates
 
 #  concern :candidate_jobable do
