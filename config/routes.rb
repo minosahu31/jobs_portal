@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   devise_for :candidates
 
 #  concern :candidate_jobable do

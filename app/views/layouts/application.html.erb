@@ -25,9 +25,14 @@
 			</ul>
 		</div>	
 	</nav>	
-
 	 <p class="notice text-center"><%= notice %></p>
      <p class="alert text-center"><%= alert %></p>
+
+    <div class="container">
+	    <% if candidate_signed_in? %>
+	     	<p class="current-candidate pull-right">User  : &nbsp &nbsp<u><%= current_candidate.email %></u></p>
+	    <% end %>
+	</div>    
 
 <%= yield %>
 

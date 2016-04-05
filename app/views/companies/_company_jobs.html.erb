@@ -1,0 +1,52 @@
+<h1>Jobs Details </h1>
+	<div class="col-md-12 col-md-offset-0">
+		<table class="table table-hover">
+			<tr class="table_row">
+				<th>S.No</th>	
+				<th>Job Title</th>
+				<th>Description</th>
+				<th>Exprience</th>
+				<th>Skills</th>
+				<% if current_candidate.role != nil %>
+					<% if current_candidate.role.downcase != "admin" && current_candidate.role.downcase != "company" || current_candidate.email == "#{@company.name.downcase}@gmail.com"%>
+						<th>Actions</th>	
+					<% end %>
+				<% end %>	
+			</tr>
+			<% @jobs.each_with_index do |job, i| %>
+			<tr class="table_row">	
+				<td>
+					<%= i+1 %>
+				</td>	
+				<td>
+					<%= job.title %></p>
+				</td>
+				<td>
+					<%= job.description %></p>
+				</td>
+				<td>
+					<%= job.exprience %></p>
+				</td>
+				<td>
+					<%= job.skill_set %></p>
+				</td>
+				<td class="actions">
+					<% if candidate_signed_in? %>
+						<% if current_candidate.email == "#{@company.name.downcase}@gmail.com" %>
+							<%= link_to "Edit", edit_company_job_path(@company,job) , class: "btn btn-default" %>
+							<%= link_to "Delete", company_job_path(@company,job) , method: :delete, data: { confirm: "Are you sure want to delete?" }, class: "btn btn-default" %>		
+						<% elsif current_candidate.role != "admin" && current_candidate.role != "company" %>
+							<% if @candidate.jobs.where(id: job.id).present? %>
+								<%= link_to "Applied", company_path(@company), class: "btn btn-danger" %>
+							<% else %>
+								<%= link_to "Apply", job_path(job), class: "btn btn-success" %>
+							<% end %>		
+						<% end %>
+					<% end %>
+				</td>	
+			</tr>		
+			
+			<% end %>
+		</table>	
+
+	</div>

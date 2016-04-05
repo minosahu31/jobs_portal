@@ -1,0 +1,15 @@
+<div class="container applied-candidates">
+<h1>Applied candidates</h1><hr/>
+<% @jobs.each do |job| %><% j =0 %>
+<p class="applied-candidates-title"><h4><b><%= job.title %>:<% @candidates.each do |candidate|%><% if job.candidates.where(id: candidate.id).present? %><% j += 1 %><% end %><% end %>  (<%= j %>)</b></h4></p>
+<% count = 0 %>
+	<% @candidates.each do |candidate|%>
+		<% if job.candidates.where(id: candidate.id).present? %>
+			<p class="applied-candidates-email"><%= candidate.email %></p><% count += 1 %>
+		<% end %>	
+	<% end %>
+	<% if count == 0 %>
+			<p class="applied-candidates-msg"><%= "Sorry no one applied till now..." %></p>
+	<% end %>
+<% end %>	
+</div>	
