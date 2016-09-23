@@ -8,9 +8,7 @@ class CandidatesController < ApplicationController
 		@company = Job.find(params[:job_id]).company
 		candidate_job = CandidateJob.new({:job_id => params[:job_id],:candidate_id => candidate.id})
 		if candidate_job.save
-			redirect_to company_path(@company)
-		else
-			render "new"	
+			redirect_to company_path(@company)	
 		end	
 
 	end
